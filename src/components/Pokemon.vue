@@ -3,7 +3,7 @@
 		<div class="card">
 			<div class="card-image">
 				<figure>
-					<img :src="pokemon.imgFront" alt="Placeholder image">
+					<img :src="currentImg" alt="Placeholder image">
 				</figure>
 			</div>
 			<div class="card-content">
@@ -13,8 +13,8 @@
 						<p class="subtitle is-6">{{ pokemon.type }}</p>
 					</div>
 				</div>
-
 				<div class="content">
+					<button class="button is-danger is-rounded is-small" @click="alterSprite">Trocar sprite</button>
 				</div>
 			</div>
 		</div>
@@ -31,12 +31,15 @@
 					this.pokemon.type = response.data.types[0].type.name;
 					this.pokemon.imgFront = response.data.sprites.front_default;
 					this.pokemon.imgBack = response.data.sprites.back_default;
+					this.currentImg = this.pokemon.imgFront;
 
 					console.log(this.pokemon);
 				})
 		},
 		data() {
 			return {
+				isFront: true,
+				currentImg: '',
 				pokemon: {
 					type: '',
 					imgFront: '',
@@ -52,6 +55,17 @@
 		filters: {
 			upperFirstLetter: function(value) {
 				return value[0].toUpperCase() + value.slice(1);
+			}
+		},
+		methods: {
+			alterSprite: function() {
+				if(this.isFront) {
+					this.isFront = false;
+					this.currentImg = this.pokemon.imgBack;
+				} else {
+					this.isFront = true;
+					this.currentImg = this.pokemon.imgFront;
+				}
 			}
 		}
 	}
