@@ -1,7 +1,23 @@
 <template>
-  <div>
-		<h1>{{ number }} {{ name | upperFirstLetter }}</h1>
-		<small>{{ url }}</small>
+  <div id="pokemon">
+		<div class="card">
+			<div class="card-image">
+				<figure>
+					<img :src="pokemon.imgFront" alt="Placeholder image">
+				</figure>
+			</div>
+			<div class="card-content">
+				<div class="media">
+					<div class="media-content">
+						<p class="title is-4">{{ number }} {{ name | upperFirstLetter }}</p>
+						<p class="subtitle is-6">{{ pokemon.type }}</p>
+					</div>
+				</div>
+
+				<div class="content">
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -22,7 +38,9 @@
 		data() {
 			return {
 				pokemon: {
-
+					type: '',
+					imgFront: '',
+					imgBack: ''
 				}
 			}
 		},
@@ -40,5 +58,7 @@
 </script>
 
 <style>
-
+	#pokemon {
+		margin-bottom: 2%;
+	}
 </style>
