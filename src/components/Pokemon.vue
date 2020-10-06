@@ -32,8 +32,6 @@
 					this.pokemon.imgFront = response.data.sprites.front_default;
 					this.pokemon.imgBack = response.data.sprites.back_default;
 					this.currentImg = this.pokemon.imgFront;
-
-					console.log(this.pokemon);
 				})
 		},
 		data() {

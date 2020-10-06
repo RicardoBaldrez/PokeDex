@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+    <img src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="">
     <div class="column is-half is-offset-one-quarter">
-      <div v-for="(pokemon, index) in pokemons" :key="index">
+      <input class="input is-rounded" type="text" name="filter" placeholder="busque pelo seu pokémon preferido ..." v-model="filter">
+      <div v-for="(pokemon, index) in resultFilter" :key="pokemon.name">
         <Pokemon :name="pokemon.name" :url="pokemon.url" :number="index + 1" />
       </div>
     </div>
@@ -16,7 +18,8 @@
     name: 'App',
     data() {
       return {
-        pokemons: []
+        pokemons: [],
+        filter: ''
       }
     },
     created: function() { // created é o método chamado assim que o componente for 'criado/chamado' dentro da aplicação(assim como no react temos o componentDidMount)
@@ -32,6 +35,15 @@
     },
     components: {
       Pokemon
+    },
+    computed: {
+      resultFilter: function() {
+        if(this.filter == '' || this.filter == ' ') {
+          return this.pokemons;
+        } else {
+          return this.pokemons.filter(pokemon => pokemon.name.includes(this.filter));
+        }
+      }
     }
   }
 </script>
@@ -44,5 +56,9 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+
+  .input {
+    margin: 10px 0 25px;
   }
 </style>
